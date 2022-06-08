@@ -1,0 +1,277 @@
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out
+                                                          % if you need a4paper
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+                                                          % paper
+
+\IEEEoverridecommandlockouts                              % This command is only
+                                                          % needed if you want to
+                                                          % use the \thanks command
+\overrideIEEEmargins
+
+\usepackage{graphicx}
+\usepackage{lipsum}  
+\usepackage{xcolor}
+\usepackage{titlesec}
+
+\titleformat{\subsection}
+{\color{blue}\normalfont\itshape}
+{\color{blue}\thesubsection}{1em}{}
+
+\newcommand{\subtitle}[1]{{\\ \small \normalfont \color{purple} #1}}
+
+
+\graphicspath{ {images/} }
+
+\title{\LARGE \bf
+Virginia Pre-Trial Data Project \\{\color{blue}Datasheet}
+}
+
+\begin{document}
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Motivation}
+
+\subsection{For what purpose was the dataset created?}
+
+``The Virginia State Crime Commission has been studying various aspects of the pre-trial process since 2016.  However, there was a significant lack of data readily available to answer many important questions related to the pre-trial process in the Commonwealth. As a result, the Virginia Pre-Trial Data Project was developed.'' 
+
+\subsection{Was there a specific task in mind?}
+
+``The Project consisted of two phases: (i) developing a cohort of adult defendants charged with a criminal offense in Virginia during October 2017 and (ii) tracking various outcomes within that cohort.''
+
+\subsection{Was there a specific gap that needed to be filled?}
+
+Following individuals from pre-trial to final dispositions, including assigned risk levels.
+
+\subsection{Who created the dataset? }
+
+The project was lead by the Virginia State Crime Commission. Data was collected from the following agencies: 
+Supreme Court of Virginia, Office of the Executive Sectretary; Alexandria Circuit Court; Fairfax County Circuit Court; Virginia Department of Criminal Justice Services;
+Virginia State Police; Virginia Department of Corrections; Virginia Compensation Board.
+
+
+\section{Uses}
+
+\subsection{Has the dataset been used for any tasks already?}
+
+Yes. 
+
+http://vscc.virginia.gov/VirginiaPretrialDataProject/VSCC%20PreTrial%20Data%20Project_Final%20Report.pdf
+
+
+
+
+\subsection{Is there a repository that links to any or all papers or systems that use the dataset?}
+
+No.
+
+\subsection{What (other) tasks could the dataset be used for?}
+
+
+
+\subsection{Is there anything about the composition of the dataset or the way it was collected and preprocessed/cleaned/labeled that might impact future uses?}
+
+Offender are from a single cohort, october 2017.
+Although criminal records were extracted for all defendents in the cohort, the data does not include those records. We have limited information regarding the criminal history of the defendant via the CALCULATION OF PUBLIC SAFETY ASSESSMENT (PSA) RISK LEVELS. For example, we know whether the defendent has a Prior Felony Conviction, but we do not know how many and what for. 
+Hispanic ethnicity within the White racial category.
+
+\subsection{Any other comments?}
+
+\lipsum[1]
+
+\section{Composition}
+
+\subsection{What do the instances that comprise the dataset represent?}
+
+Each instance reports on a `contact event', defined as: ``all charges against a defendant in the same jurisdiction on the same day and having the same CBR number'' (CBR stands for “Commit, Bond, Release” and refers to any one of these bail processes) \cite{codebook}.
+
+Each instance includes information regarding the defendant, and the progression of the criminal case from the time a defendant is charged with an offense until
+the final disposition of the case, i.e., trial or sentencing \cite{codebook}.
+
+If the same individual has more than one contact event during the month of October 2017, only the earlier contact event is reported in the data. If a defendant was charged with multiple offenses on the same day, but the offenses were heard in
+different courts, those records were grouped by court and reported as separate events.
+
+\subsection{Are there multiple types of instances?}
+
+No.
+
+\subsection{How many instances are there in total?}
+
+The dataset contains 22,986 adult defendants charged with a criminal offense during a October 2017.
+
+\subsection{Does the dataset contain all possible instances or is it a sample (not necessarily random) of instances from a larger set?}
+
+The cohort includes all defendants charged in Virginia in October 2017. However, some instances were excluded from the follow-up and as a results can not be used for most analysis. The reason for the excluding is reported in the variable `Exclude' and include missing data, the defendant being under 18 when they were charged, and the offense not being punishable by incarceration, amongst other reasons. 
+
+\subsection{What data does each instance consist of?}
+
+The dataset contains over 700 variables for each defendant. Broadly, these include:
+1. Demographics: Sex, Race, Age, Indigency Status, Virginia Residency Status, Zip Code.
+2. Pending charges: 
+3. State or local probation status: 
+4. October 2017 charge(s): number of offense, offense and offense type (up to 10).
+5. Bond: Bond Type and amount at initial contact and at release
+6. Release status: Whether Defendant Was Released During Pre-trial Period, Pre-Trial Release Date, Pretrial Release Type.
+7. whether the defendant received pretrial services agency supervision: supervision Days, conditions. Whether defendant is on state or community supervision
+8. Case: attorney type, court type, court locality, sentence type, imposed and effective sentence, Final Disposition and  disposition date. 
+9. Prior criminal history: age at first adult arrest; number prior arrests for felonies, misdemeanors, and specific crimes, e.g., domestic abuse; number of prior convictions overall, as an adult, in the past 2 and 5 years, for felonies, misdemeanors, and specific crimes, e.g., drug convictions. Prior sentencing for felonies and probation Revocation ; prior probation revocations, number of prior incarceration events for more than 14 days, less and more than a year.
+10: Risk level: components to calculate VPRAI [CITE] and PSA [CITE] risk levels, and corrsponding scores. 
+11. Court appearance and public safety: details on new failure to appear and offending in the follow up period.  
+12: Aggregate locality characteristics: locality Name, Region, population estimate, density and demographic (race, ethnicity, sex and age combined) composition, unemployment and education rates, number of law enforcement officers, income, health insurance, citizenship status; incident and arrest rate overall and for specific crimes. 
+
+\subsection{Is there a label or target associated with each instance?}
+
+There is not pre-specified target label. However, variables under the court appearance and public safety, e.g., new offending, are particularly suitable to be used as target variables. 
+
+\subsection{Are there recommended data splits (e.g., training, development/validation, testing)?}
+
+No.
+
+\subsection{Are there any errors, sources of noise, or redundancies in the dataset?}
+
+Records with missing data were excluded from the follow on analysis. The reason for the exclusion is reported in the variable `Exclude' (See pg. 270 is \cite{codebook}).
+
+Hispanic ethnicity is considered within the White racial category.
+
+
+\subsection{Is the dataset self-contained, or does it link to or otherwise rely on external resources?}
+
+The data is self-contained
+
+\subsection{Does the dataset contain data that might be considered confidential?}
+
+No.
+
+\subsection{Does the dataset contain data that, if viewed directly, might be offensive, insulting, threatening, or might otherwise cause anxiety?}
+
+No.
+
+\subsection{Does the dataset identify any subpopulations (e.g., by age, gender)?}
+
+Yes, the defendants' sex, age and race is reported. 
+
+\subsection{Is it possible to identify individuals (i.e., one or more natural persons), either directly or indirectly (i.e., in combination with other data) from the dataset?}
+
+Unlikely. Only indirectly, and only if the case received significant media attention.  
+
+\subsection{Does the dataset contain data that might be considered sensitive in any way?}
+
+Criminal history
+
+
+\section{Collection Process}
+
+\subsection{How was the data associated with each instance acquired?}
+
+The data is a compilation of information and
+variables provided by numerous state and local government agencies across Virginia:
+
+1. Supreme Court of Virginia, Office of the Executive Sectretary: eMagistrate Sytem; Circuit, General District, and Juvenile and Domestic Relations District Court Case Management
+Systems.
+2. Alexandria Circuit Court: Alexandria Circuit Court Case Management System
+3. Fairfax County Circuit Court: Fairfax County Circuit Court Case Management System
+4. Virginia Department of Criminal Justice Services: Pretrial and Community Corrections Case Management System (PTCC)
+5. Virginia State Police: Central Criminal Records Exchange (CCRE)
+6. Virginia Department of Corrections: Corrections Information System (CORIS)
+7. Virginia Compensation Board: Local Inmate Data System (LIDS)
+
+\subsection{Was the data directly observable (e.g., raw text, movie ratings), reported by subjects (e.g., survey responses), or indirectly inferred/derived from other data (e.g., part-of-speech tags)?}
+
+Data was extracted from government record keeping systems. No direct validation of the data has been conducted. 
+
+\subsection{Who was involved in the data collection process and how were they compensated?}
+
+The data collected by paid workers (assumed).
+
+\subsection{Over what timeframe was the data collected? Does this timeframe match the creation timeframe of the data associated with the instances?}
+
+Adult defendants charged with a criminal offense during October 2017 were included. They were tracked until final case disposition or December 31, 2018, whichever came first.
+
+\subsection{Were any ethical review processes conducted?}
+
+Unknown.
+
+\subsection{Did you collect the data from the individuals in question directly, or obtain it via third parties or other sources?}
+
+The data was collected from government agencies. 
+
+\subsection{Were the individuals in question notified about the data collection?}
+
+Individuals likely know their data was entered into the agency's data collection system. It is unlikely they knew or consented the use of the data for research purposes.
+
+
+\subsection{Has an analysis of the potential impact of the dataset and its use on data subjects (e.g., a data protection impact analysis) been conducted?}
+
+Unknown.
+
+\subsection{Any other comments?}
+\lipsum[1]
+
+\section{Pre-processing, cleaning, labeling}
+
+\subsection{Was any preprocessing/cleaning/labeling of the data done?}
+
+Details regarding pre-processing can be found in the codebook \cite{codebook}. Broadly, the defendant's criminal history is not presented in its raw from. For example, we do not see that defendant a was charged with offense 1 in the year y and so on. Instead, we are told that defendant a has x prior charges from type 1. 
+
+\subsection{Was the “raw” data saved in addition to the preprocessed/cleaned/labeled data (e.g., to support unanticipated future uses)?}
+
+No.
+
+\subsection{Is the software that was used to preprocess/clean/label the data available?}
+
+No.
+
+\section{Distribution}
+\subsection{Will the dataset be distributed to third parties outside of the entity (e.g., company, institution, organization) on behalf of which the dataset was created? If so, please provide a description. How will the dataset will be distributed (e.g., tarball on website, API, GitHub)?}
+
+Yes. The dataset is publicly available on The Virginia State Crime Commission's website: http://www.vcsc.virginia.gov/pretrialdataproject.html.
+
+
+\subsection{Will the dataset be distributed under a copyright or other intellectual property (IP) license, and/or under applicable terms of use (ToU)?}
+
+Unknown. 
+
+\subsection{Have any third parties imposed IP-based or other restrictions on the data associated with the instances?}
+
+Unknown. 
+
+
+\subsection{Any other comments?}
+
+\section{Maintenance}
+
+\subsection{Who will be supporting/hosting/maintaining the dataset?}
+
+The Virginia State Crime Commission. 
+
+\subsection{How can the owner/curator/manager of the dataset be contacted (e.g., email address)?}
+
+At the point of this publication, it is stated that ``if you are having trouble downloading the dataset, please email meredith.farrar-owens@vcsc.virginia.gov or call Sentencing Commission staff at 804.225.4398'' 
+
+\subsection{Will the dataset be updated (e.g., to correct labeling errors, add new instances, delete instances)?}
+
+``Data continues to be reviewed, revised, and validated as necessary'' [cite website].
+
+\subsection{If the dataset relates to people, are there applicable limits on the retention of the data associated with the instances (e.g., were the individuals in question told that their data would be retained for a fixed period of time and then deleted)?}
+
+No.
+
+\subsection{Will older versions of the dataset continue to be supported/hosted/maintained?}
+
+No.
+
+\subsection{If others want to extend/augment/build on/contribute to the dataset, is there a mechanism for them to do so?}
+
+No.
+
+\medskip
+ 
+\bibliographystyle{unsrt}  
+\bibliography{Virginia_Pre_Trial_Data_Project_Datasheet}
+
+\end{document}
