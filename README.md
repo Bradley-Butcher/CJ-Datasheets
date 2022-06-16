@@ -1,4 +1,4 @@
-# CJ-Datasheets
+# A Survey and Datasheet Repository of Publicly Available US Criminal Justice Datasets
 
 | Datasheets | Location            |
 |------------|---------------------|
